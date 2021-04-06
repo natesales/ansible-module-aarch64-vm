@@ -1,0 +1,17 @@
+- hosts: localhost
+  tasks:
+    - name: Create a VM
+      aarch64_vm:
+        api_key: "iK3K8oSb9jWw2L+ufESfGvzpnrp/0pOr2Rh9kc"
+        hostname: "anton-k8s-ingress.piedpiper.com"
+        project: "5nzn9b3JHeY56fz9UMaQ3brFLZahZw"
+        plan: "v1.small"
+        os: "debian"
+        pop: "dfw"
+      register: vm_create
+
+    - name: Delete a VM
+      aarch64_vm:
+        api_key: "iK3K8oSb9jWw2L+ufESfGvzpnrp/0pOr2Rh9kc"
+        id: "{{ vm_create.vm._id }}"
+        state: "absent"
